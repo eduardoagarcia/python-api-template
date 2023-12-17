@@ -1,0 +1,32 @@
+version: '3'
+services:
+  api:
+    container_name: template-api
+    build: api
+    image: template-api
+    volumes:
+      - ./api/app:/opt/pysetup/app:delegated
+    ports:
+      - '8000:8000'
+    depends_on:
+      - postgres
+    networks:
+      template-network:
+        aliases:
+          - template-api
+  postgres:
+    image: postgres:15-alpine
+    restart: on-failure
+    container_name: template-postgres
+    environment:
+      - POSTGRES_DB=template
+      - POSTGRES_USER=default
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - '5432:5432'
+    networks:
+      template-network:
+        aliases:
+          - template-postgres
+networks:
+  template-network:
