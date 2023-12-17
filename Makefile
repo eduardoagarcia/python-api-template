@@ -3,11 +3,12 @@
 API := template-api
 
 init:
-	docker-compose build --no-cache
-	docker-compose up -d postgres
-	echo "Waiting 10 seconds for postgres to boot..."
-	sleep 10
-	docker-compose up -d api
+	cd api && @cp -n .env.example .env || true
+	#docker-compose build --no-cache
+	#docker-compose up -d postgres
+	#echo "Waiting 10 seconds for postgres to boot..."
+	#sleep 10
+	#docker-compose up -d api
 
 build:
 	docker-compose build --no-cache
