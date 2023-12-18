@@ -1,8 +1,9 @@
 import os
+from typing import Iterator, Optional
+
 from app.db.connections.base import BaseConnection
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import Session as Connection
-from typing import Iterator, Optional
 
 
 class PostgresConnection(BaseConnection):

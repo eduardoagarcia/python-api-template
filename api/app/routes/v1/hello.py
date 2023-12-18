@@ -2,7 +2,7 @@ from typing import List
 
 from app.db.connections.postgres import postgres_connection
 from app.models.name import NameRepository, Name
-from fastapi import APIRouter, Depends, Body, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import PositiveInt
 from sqlalchemy.orm import Session as Connection
 

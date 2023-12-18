@@ -1,4 +1,5 @@
 import os
+
 from app.db.connections.postgres import (
     PostgresConnection,
     postgres_connection,
