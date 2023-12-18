@@ -9,6 +9,7 @@ init:
 	@echo "Waiting 10 seconds for postgres to boot..."
 	@sleep 10
 	docker-compose up -d api
+	docker exec -it $(API) sh -c "alembic upgrade head"
 
 build:
 	docker-compose build --no-cache
@@ -30,6 +31,9 @@ poetry-install:
 
 run-tests:
 	cd api && poetry run pytest
+
+run-migrations:
+	docker exec -it $(API) sh -c "alembic upgrade head"
 
 logs:
 	docker logs $(API)

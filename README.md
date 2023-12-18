@@ -85,8 +85,12 @@ python-api-template/api/.venv/bin/python
 
 ## Database Migrations with Alembic
 
-To create a new database migration:
+To run the datadbase migrations within the container:
+```shell
+make run-migrations
+```
 
+To create a new database migration:
 ```shell
 cd api
 poetry run alembic revision -m "create_new_names_table"
