@@ -1,8 +1,8 @@
-# Python API
+# Python API Template
 
-This project is simple Python API template.
+This project is a simple Python API template to get started quickly.
 
-### Back End: `api`
+### Back End
 - Python
 - Postgres
 - Poetry
@@ -31,11 +31,11 @@ installed, you can follow these guides:
 
 1. Clone the repo:
     ```shell
-    git clone git@github.com:eduardoagarcia/python-template.git
+    git clone git@github.com:eduardoagarcia/python-api-template.git
     ```
 2. Navigate to the project directory:
     ```shell
-    cd python-template
+    cd python-api-template
     ```
 3. Initialize and start the app:
     ```shell
@@ -80,7 +80,7 @@ make poetry-install
 
 After installing Poetry on your machine, if you need to configure your IDE (like IntelliJ) with the Python interpreter, it will be located here:
 ```text
-python-template/api/.venv/bin/python
+python-api-template/api/.venv/bin/python
 ```
 
 ## Database Migrations with Alembic
