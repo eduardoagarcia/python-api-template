@@ -30,7 +30,7 @@ class TestHelloRequestHandler:
         assert response.status_code == HTTPStatus.OK
         assert response.json() == expected_response
 
-    def test_get_nams(self) -> None:
+    def test_get_names(self) -> None:
         self.postgres_connection_mock.query().order_by().all.return_value = [
             NameModel(
                 id=1,
