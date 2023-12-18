@@ -52,25 +52,25 @@ Once your app is up and running, these are two helpful links to get started:
 
 ## Installing Python and Poetry for Local Development
 
-Install Python `3.12.0b2` (or most recent version)
+Install Python `3.12.0` (or most recent version)
 ```shell
-env CONFIGURE_OPTS='--enable-optimizations' pyenv install 3.12.0b2
+env CONFIGURE_OPTS='--enable-optimizations' pyenv install 3.12.0
 ```
 Note: if you run into issues, [this openssl thread](https://stackoverflow.com/questions/77237751/3-12-install-fails-on-intel-macbook-pro) might help.
 
-Set `3.12.0b2` as the default version
+Set `3.12.0` as the default version
 ```shell
-pyenv global 3.12.0b2
+pyenv global 3.12.0
 ```
 
-Determine where the `3.12.0b2` version is located on your machine
+Determine where the `3.12.0` version is located on your machine
 ```shell
 pyenv which python
 ```
 
 Update Poetry to use the correct Python version:
 ```shell
-poetry env use {example: <your path>/.pyenv/versions/3.12.0b2/bin/python}
+poetry env use <your path>/.pyenv/versions/3.12.0/bin/python
 ```
 
 Install Poetry project via make:
