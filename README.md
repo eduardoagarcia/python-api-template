@@ -1,6 +1,6 @@
 # Python API Template
 
-This project is a simple Python API template to get started quickly.
+This project is a simple Python template to start building APIs quickly!
 
 ### Back End
 - Python
