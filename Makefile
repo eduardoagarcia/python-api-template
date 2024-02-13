@@ -38,4 +38,7 @@ run-migrations:
 logs:
 	docker logs $(API)
 
+deploy:
+	gcloud builds submit --config ./infra/cloudbuild.yaml
+
 all: init
