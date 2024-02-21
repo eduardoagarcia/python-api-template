@@ -85,7 +85,7 @@ python-api-template/api/.venv/bin/python
 
 ## Database Migrations with Alembic
 
-To run the datadbase migrations within the container:
+To run the database migrations within the container:
 ```shell
 make run-migrations
 ```
