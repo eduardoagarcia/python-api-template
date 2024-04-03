@@ -26,10 +26,9 @@ RUN apt-get update \
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 WORKDIR $PYSETUP_PATH
-COPY ./poetry.lock ./pyproject.toml ./alembic.ini ./
+COPY ./poetry.lock ./pyproject.toml ./
 COPY ./app/ ./app/
-COPY ./database/migrations/ ./database/migrations/
-COPY .env.example ./.env
+COPY .env.local ./.env
 RUN poetry add psycopg2
 RUN poetry install
 
