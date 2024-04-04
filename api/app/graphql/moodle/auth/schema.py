@@ -1,20 +1,15 @@
-from typing import Optional
-
 import strawberry
 
-from app.graphql.moodle.auth.api import moodle_login, MoodleLoginResponse
+from .api import moodle_login
+from .types import MoodleLoginResponse, MoodleLoginResponseModel
+
+
+async def login(username: str, password: str) -> MoodleLoginResponse:
+    moodle_login_response: MoodleLoginResponseModel = await moodle_login(username=username, password=password)
+
+    return MoodleLoginResponse.from_pydantic(moodle_login_response)
 
 
 @strawberry.type
-class LoginResponse:
-    token: str
-    private_token: Optional[str]
-
-
-@strawberry.type
-class AuthQuery:
-    @strawberry.field()
-    def login(self, username: str, password: str) -> LoginResponse:
-        login_response: MoodleLoginResponse = moodle_login(username=username, password=password)
-
-        return LoginResponse(token=login_response.token, private_token=login_response.privatetoken)
+class MoodleAuthOperations:
+    login: MoodleLoginResponse = strawberry.field(resolver=login)

@@ -1,18 +1,26 @@
 import strawberry
 
-from .moodle.auth.schema import AuthQuery as MoodleAuthQuery
+from .api.auth.schema import APIAuthOperations
+from .moodle.auth.schema import MoodleAuthOperations
 
 
 @strawberry.type
-class BaseQuery:
+class HealthQuery:
     @strawberry.field()
-    def health_check(self) -> str:
+    def health(self) -> str:
         return "GraphQL is up and running!"
 
 
 @strawberry.type
-class Query(BaseQuery, MoodleAuthQuery):
-    pass
+class Query(HealthQuery):
+    api_auth: APIAuthOperations = strawberry.field(resolver=lambda: APIAuthOperations())
+    moodle_auth: MoodleAuthOperations = strawberry.field(resolver=lambda: MoodleAuthOperations())
 
 
-schema = strawberry.Schema(query=Query)
+@strawberry.type
+class Mutation:
+    api_auth: APIAuthOperations = strawberry.field(resolver=lambda: APIAuthOperations())
+    moodle_auth: MoodleAuthOperations = strawberry.field(resolver=lambda: MoodleAuthOperations())
+
+
+schema = strawberry.Schema(query=Query, mutation=Mutation)

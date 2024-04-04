@@ -1,37 +1,30 @@
 import http
 import os
-from typing import Optional
 
-import requests
+import httpx
 from dotenv import load_dotenv
-from pydantic import BaseModel
 
-from app.graphql.moodle.api import generate_moodle_url
+from .types import MoodleLoginResponseModel
+from ..api import generate_moodle_url
 
 load_dotenv()
 
 
-class MoodleLoginResponse(BaseModel):
-    token: Optional[str] = None
-    privatetoken: Optional[str] = None
-
-
-def moodle_login(username: str, password: str) -> MoodleLoginResponse:
-    empty_response: MoodleLoginResponse = MoodleLoginResponse(token="", privatetoken="")
-
-    response = requests.get(
-        generate_moodle_url(os.getenv("MOODLE_API_LOGIN_PATH")),
-        params={
-            "username": username,
-            "password": password,
-            "service": os.getenv("MOODLE_WEB_SERVICE"),
-        },
-    )
+async def moodle_login(username: str, password: str) -> MoodleLoginResponseModel:
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            generate_moodle_url(os.getenv("MOODLE_API_LOGIN_PATH")),
+            params={
+                "username": username,
+                "password": password,
+                "service": os.getenv("MOODLE_WEB_SERVICE"),
+            },
+        )
 
     if response.status_code == http.HTTPStatus.OK:
         if "error" not in response.json():
-            return MoodleLoginResponse(**response.json())
+            return MoodleLoginResponseModel(**response.json())
         else:
-            return empty_response
+            raise Exception(response.json())
     else:
-        return empty_response
+        raise Exception(f"Moodle Login Error {response.status_code}: {response.text}")
