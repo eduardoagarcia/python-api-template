@@ -16,7 +16,7 @@ class MoodleLoginResponse(BaseModel):
     privatetoken: Optional[str] = None
 
 
-def moodle_login(username: str, password: str, service: str) -> MoodleLoginResponse:
+def moodle_login(username: str, password: str) -> MoodleLoginResponse:
     empty_response: MoodleLoginResponse = MoodleLoginResponse(token="", privatetoken="")
 
     response = requests.get(
@@ -24,12 +24,12 @@ def moodle_login(username: str, password: str, service: str) -> MoodleLoginRespo
         params={
             "username": username,
             "password": password,
-            "service": service
+            "service": os.getenv("MOODLE_WEB_SERVICE"),
         },
     )
 
     if response.status_code == http.HTTPStatus.OK:
-        if 'error' not in response.json():
+        if "error" not in response.json():
             return MoodleLoginResponse(**response.json())
         else:
             return empty_response

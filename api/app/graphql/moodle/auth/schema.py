@@ -14,7 +14,7 @@ class LoginResponse:
 @strawberry.type
 class AuthQuery:
     @strawberry.field
-    def login(self, username: str, password: str, service: str) -> LoginResponse:
-        login_response: MoodleLoginResponse = moodle_login(username=username, password=password, service=service)
+    def login(self, username: str, password: str) -> LoginResponse:
+        login_response: MoodleLoginResponse = moodle_login(username=username, password=password)
 
         return LoginResponse(token=login_response.token, private_token=login_response.privatetoken)

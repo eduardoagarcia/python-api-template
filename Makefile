@@ -25,4 +25,7 @@ shell:
 logs:
 	docker logs $(API)
 
+follow-logs:
+	docker logs -f $(API)
+
 all: init
