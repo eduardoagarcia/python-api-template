@@ -12,6 +12,6 @@ class MoodleCourse:
 
 @strawberry.type
 class Query:
-    @strawberry.field
+    @strawberry.field()
     def moodle_courses(self, token: str) -> list[MoodleCourse]:
-        return fetch_moodle_courses()
+        return fetch_moodle_courses(token=token)

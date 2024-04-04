@@ -5,7 +5,7 @@ from .moodle.auth.schema import AuthQuery as MoodleAuthQuery
 
 @strawberry.type
 class BaseQuery:
-    @strawberry.field
+    @strawberry.field()
     def health_check(self) -> str:
         return "GraphQL is up and running!"
 

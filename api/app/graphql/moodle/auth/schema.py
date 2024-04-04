@@ -13,7 +13,7 @@ class LoginResponse:
 
 @strawberry.type
 class AuthQuery:
-    @strawberry.field
+    @strawberry.field()
     def login(self, username: str, password: str) -> LoginResponse:
         login_response: MoodleLoginResponse = moodle_login(username=username, password=password)
 
